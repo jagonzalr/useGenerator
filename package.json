@@ -1,6 +1,6 @@
 {
   "name": "use-generator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Generator using React hooks.",
   "main": "lib/index.js",
   "files": [
@@ -87,5 +87,6 @@
     "hooks": {
       "pre-commit": "lint-staged && pretty-quick --staged"
     }
-  }
+  },
+  "dependencies": {}
 }
