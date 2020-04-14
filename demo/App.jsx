@@ -17,45 +17,58 @@ const IMAGE_URLS = [
 const IP_URL = 'https://api.ipify.org'
 
 const App = () => {
+  const [startFetching, setStarFetching] = useState(false)
   const [images, setImages] = useState([])
   const [ipAddress, setIpAddress] = useState(null)
   const [loading, setLoading] = useState(true)
 
-  useGenerator(function* () {
-    let images = []
-    for (let i = 0; i < IMAGE_URLS.length; i++) {
-      const url = IMAGE_URLS[i]
-      const img = yield fetch(url)
-      if (!img.error) images.push(img.value.url)
-    }
+  useGenerator(
+    function* () {
+      if (startFetching) {
+        let images = []
+        for (let i = 0; i < IMAGE_URLS.length; i++) {
+          const url = IMAGE_URLS[i]
+          const img = yield fetch(url)
+          if (!img.error) images.push(img.value.url)
+        }
 
-    const ipResponse = yield fetch(IP_URL).then(data => data.text())
+        const ipResponse = yield fetch(IP_URL).then(data => data.text())
 
-    setImages(images)
-    setIpAddress(ipResponse.value)
-    setLoading(false)
-  }, [])
+        setImages(images)
+        setIpAddress(ipResponse.value)
+        setLoading(false)
+      }
+    },
+    [startFetching]
+  )
 
   return (
     <div className='container mx-auto px-3 py-3'>
       <h1 className='bold font-bold text-3xl flex-1'>useGenerator</h1>
-      {loading ? (
-        <p className='my-2'>Loading data ...</p>
-      ) : (
+      {!startFetching && (
+        <button onClick={() => setStarFetching(true)}>Fetch</button>
+      )}
+      {startFetching && (
         <Fragment>
-          {ipAddress && (
-            <p className='mt-2 mb-4'>Your IP address is: {ipAddress}</p>
+          {loading ? (
+            <p className='my-2'>Fetching data ...</p>
+          ) : (
+            <Fragment>
+              {ipAddress && (
+                <p className='mt-2 mb-4'>Your IP address is: {ipAddress}</p>
+              )}
+              <div className='flex flex-wrap'>
+                {images.map(imageUrl => (
+                  <img
+                    key={imageUrl}
+                    src={imageUrl}
+                    alt={imageUrl}
+                    className='flex-1'
+                  />
+                ))}
+              </div>
+            </Fragment>
           )}
-          <div className='flex flex-wrap'>
-            {images.map(imageUrl => (
-              <img
-                key={imageUrl}
-                src={imageUrl}
-                alt={imageUrl}
-                className='flex-1'
-              />
-            ))}
-          </div>
         </Fragment>
       )}
     </div>
