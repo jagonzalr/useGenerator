@@ -1,6 +1,6 @@
 {
   "name": "use-generator",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Generator using React hooks.",
   "main": "lib/index.js",
   "files": [
@@ -88,7 +88,5 @@
       "pre-commit": "lint-staged && pretty-quick --staged"
     }
   },
-  "dependencies": {
-    "@n1ru4l/use-async-effect": "^1.2.0"
-  }
+  "dependencies": {}
 }
