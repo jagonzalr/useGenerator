@@ -87,6 +87,5 @@
     "hooks": {
       "pre-commit": "lint-staged && pretty-quick --staged"
     }
-  },
-  "dependencies": {}
+  }
 }
