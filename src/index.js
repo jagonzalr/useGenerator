@@ -29,7 +29,9 @@ export const useGenerator = (generator, deps = []) => {
             result.value = { value: null, error: error.message }
           }
         } catch (err) {
+          /* eslint-disable */
           console.error(`useGenerator - unhandled error: ${err.message}`)
+          /* eslint-enable */
           return
         }
       }

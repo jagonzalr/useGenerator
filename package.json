@@ -1,6 +1,6 @@
 {
   "name": "use-generator",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Generator using React hooks.",
   "main": "lib/index.js",
   "files": [
@@ -63,6 +63,7 @@
     "react-dom": "^16.13.1",
     "react-hot-loader": "^4.12.20",
     "sass-loader": "^8.0.2",
+    "style-loader": "^1.2.1",
     "tailwindcss": "^1.2.0",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
@@ -75,7 +76,8 @@
       "@babel/preset-react"
     ],
     "plugins": [
-      "@babel/plugin-syntax-dynamic-import"
+      "@babel/plugin-syntax-dynamic-import",
+      "@babel/plugin-transform-runtime"
     ]
   },
   "lint-staged": {
